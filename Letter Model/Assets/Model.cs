@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,12 +19,20 @@ public class Model
         faces = new List<Vector3Int>();
         addfaces();
 
+        /*texture_coordinates = new List<Vector2>();
+        addTextureVertices();*/
+
     }
+
+    /*private void addTextureVertices()
+    {
+        texture_coordinates.Add(new Vector2(99, 108));
+    }*/
 
     private void addfaces()
     {
         //Front faces
-       faces.Add(new Vector3Int(0, 2, 3)); // 0
+       faces.Add(new Vector3Int(0, 2, 3)); //texture_index_list.Add(new Vector3Int());// 0
        faces.Add(new Vector3Int(0, 3, 1)); // 1
        faces.Add(new Vector3Int(1, 3, 4)); // 2
        faces.Add(new Vector3Int(3, 6, 4)); // 3
@@ -39,20 +48,36 @@ public class Model
         faces.Add(new Vector3Int(12, 13, 15)); // 11
 
         //Bottom Faces
-        faces.Add(new Vector3Int(6, 14, 15));
-        faces.Add(new Vector3Int(6, 15, 7));
+        faces.Add(new Vector3Int(6, 14, 15)); // 12
+        faces.Add(new Vector3Int(6, 15, 7)); // 13
 
         //Top Faces
-        faces.Add(new Vector3Int(9, 0, 1));
-        faces.Add(new Vector3Int(9, 1, 8));
+        faces.Add(new Vector3Int(0, 1, 8)); // 14
+        faces.Add(new Vector3Int(8, 1, 9));// 15
 
         //Side Back Face
-        faces.Add(new Vector3Int());
-        faces.Add(new Vector3Int());
+        faces.Add(new Vector3Int(1, 4, 12));//16
+        faces.Add(new Vector3Int(1, 12, 9));//17
 
         //Side Front Face
-        faces.Add(new Vector3Int());
-        faces.Add(new Vector3Int());
+        faces.Add(new Vector3Int(11, 14, 6));//18
+        faces.Add(new Vector3Int(11, 6, 3));//19
+
+        //Bottom cover Face
+        faces.Add(new Vector3Int(2, 10, 11));//20
+        faces.Add(new Vector3Int(2, 11, 3));//21
+
+        //Top cover Face
+        faces.Add(new Vector3Int(12, 4, 5));//22
+        faces.Add(new Vector3Int(12, 5, 13));//23
+
+        //Top Front Face
+        faces.Add(new Vector3Int(8, 10, 2));//24
+        faces.Add(new Vector3Int(8, 2, 0));//25
+
+        //Bottom Front Face
+        faces.Add(new Vector3Int(5, 7, 15));//26
+        faces.Add(new Vector3Int(5, 15, 13));//27
     }
 
     private void addvertices()
