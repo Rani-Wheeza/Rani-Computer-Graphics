@@ -16,11 +16,17 @@ public class Model
     {
         vertices = new List<Vector3>();
         addvertices();
-        faces = new List<Vector3Int>();
-        addfaces();
+
 
         texture_coordinates = new List<Vector2>();
         addTextureVertices();
+
+
+        faces = new List<Vector3Int>();
+        texture_index_list = new List<Vector3Int>();
+        addfaces();
+
+
 
         texture_coordinates = convertToUV(1024);
 
@@ -68,10 +74,10 @@ public class Model
     private void addfaces()
     {
         //Front faces
-       faces.Add(new Vector3Int(0, 2, 3)); texture_index_list.Add(new Vector3Int(2, 6, 7));// 0
-       faces.Add(new Vector3Int(0, 3, 1)); texture_index_list.Add(new Vector3Int(2, 7, 3));// 1
-       faces.Add(new Vector3Int(1, 3, 4));  texture_index_list.Add(new Vector3Int(3, 7, 10));// 2
-       faces.Add(new Vector3Int(3, 6, 4)); texture_index_list.Add(new Vector3Int(7, 14, 10));// 3
+        faces.Add(new Vector3Int(0, 2, 3)); texture_index_list.Add(new Vector3Int(2, 6, 7));// 0
+        faces.Add(new Vector3Int(0, 3, 1)); texture_index_list.Add(new Vector3Int(2, 7, 3));// 1
+        faces.Add(new Vector3Int(1, 3, 4)); texture_index_list.Add(new Vector3Int(3, 7, 10));// 2
+         faces.Add(new Vector3Int(3, 6, 4)); texture_index_list.Add(new Vector3Int(7, 14, 10));// 3
         faces.Add(new Vector3Int(4, 6, 7)); texture_index_list.Add(new Vector3Int(10, 14, 15));// 4
         faces.Add(new Vector3Int(4, 7, 5)); texture_index_list.Add(new Vector3Int(10, 15, 11));// 5
 
@@ -84,12 +90,12 @@ public class Model
         faces.Add(new Vector3Int(12, 13, 15)); texture_index_list.Add(new Vector3Int(9, 8, 12));// 11
 
         //Bottom Faces
-        faces.Add(new Vector3Int(6, 14, 15)); texture_index_list.Add(new Vector3Int());// 12
-        faces.Add(new Vector3Int(6, 15, 7)); texture_index_list.Add(new Vector3Int());// 13
+        faces.Add(new Vector3Int(6, 14, 15)); texture_index_list.Add(new Vector3Int(16, 18, 19));// 12
+        faces.Add(new Vector3Int(6, 15, 7)); texture_index_list.Add(new Vector3Int(16, 19,17));// 13
 
         //Top Faces
-        faces.Add(new Vector3Int(0, 1, 8)); texture_index_list.Add(new Vector3Int()); // 14
-        faces.Add(new Vector3Int(8, 1, 9)); texture_index_list.Add(new Vector3Int());// 15
+        faces.Add(new Vector3Int(0, 1, 8)); texture_index_list.Add(new Vector3Int(20,22,23)); // 14
+        faces.Add(new Vector3Int(8, 1, 9)); texture_index_list.Add(new Vector3Int(20,23,21));// 15
 
         //Side Back Face
         faces.Add(new Vector3Int(1, 4, 12)); texture_index_list.Add(new Vector3Int());//16
