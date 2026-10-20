@@ -32,7 +32,7 @@ public class Graphic_Pipeline : MonoBehaviour
 
         Display(imageAfterRotation);
 
-
+        
         // 2nd Transformation Scale be (4,1,1)
 
         Matrix4x4 scaleMatrix = Matrix4x4.TRS(
@@ -47,16 +47,16 @@ public class Graphic_Pipeline : MonoBehaviour
 
         Display(imageAftertheScale);
 
-
+        
         Matrix4x4 traslationMatrix = Matrix4x4.TRS(
             new Vector3(0, -3, 2),
             Quaternion.identity,
             Vector3.one);
-
+        
         List<Vector4> imageAfterTranslation = MatrixTransform(traslationMatrix, imageAftertheScale);
 
         Display(imageAfterTranslation);
-
+       
 
     }
 

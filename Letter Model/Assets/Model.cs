@@ -154,9 +154,7 @@ public class Model
 
         vertices.Add(new Vector3(-3, -3, 1)); // 14
 
-        vertices.Add(new Vector3(3, -3, 1)); // 15
-
-       
+        vertices.Add(new Vector3(3, -3, 1)); // 15       
 
     }
 
