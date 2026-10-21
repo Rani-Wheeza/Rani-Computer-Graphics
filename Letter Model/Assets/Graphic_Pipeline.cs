@@ -15,6 +15,9 @@ public class Graphic_Pipeline : MonoBehaviour
 
         Display(verts);
 
+        //SingleAterMOT
+
+
         // First Transformation
 
         // Rotation by - 25 degrees about (-2,1,1).normalized
@@ -52,11 +55,25 @@ public class Graphic_Pipeline : MonoBehaviour
             new Vector3(0, -3, 2),
             Quaternion.identity,
             Vector3.one);
+
+        Display(traslationMatrix);
         
         List<Vector4> imageAfterTranslation = MatrixTransform(traslationMatrix, imageAftertheScale);
 
         Display(imageAfterTranslation);
-       
+
+        //Single Matix
+
+        Matrix4x4 singleMOT = traslationMatrix * scaleMatrix * rotationMatrix;
+
+        Display(singleMOT);
+        List<Vector4> singleAfterMOT = MatrixTransform(singleMOT, verts);
+
+        Display(singleAfterMOT);
+
+  
+
+
 
     }
 
