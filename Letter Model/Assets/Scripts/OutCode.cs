@@ -51,19 +51,19 @@ public class OutCode
         return new OutCode(a.up && b.up, a.down && b.down, a.left && b.left, a.right && b.right);
     }
 
-    /*public static OutCode operator ==(OutCode a, OutCode b)
+    public static bool operator ==(OutCode a, OutCode b)
     {
-        return new OutCode(a.up || b.up, a.down || b.down, a.left || b.left, a.right || b.right);
+        return (a.up == b.up) && (a.down == b.down) && (a.left == b.left) && (a.right == b.right);
     }
 
-    public static OutCode operator !=(OutCode a, OutCode b)
+    public static bool operator !=(OutCode a, OutCode b)
     {
         return !(a == b);
-    }*/
+    }
 
     public override string ToString()
     {
-        return base.ToString();
+        return (up ? "1" : "0") + (down ? "1" : "0") + (left ? "1" : "0") + (right ? "1" : "0");
     }
   
   
