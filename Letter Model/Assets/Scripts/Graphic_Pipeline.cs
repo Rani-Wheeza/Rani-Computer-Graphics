@@ -187,6 +187,25 @@ public class Graphic_Pipeline : MonoBehaviour
         //print(LineClipping(ref Vector2 start, ref Vector2 end));
 
 
+
+
+        //Vector2 start = new Vector2(0F, 0F), end = new Vector2(1F, 1F);  // Tested correct
+        // Vector2 start = new Vector2(-2.4f, 0F), end = new Vector2(-1.7F, 1F);  // Tested correct
+
+        //   Vector2 start = new Vector2(2.4f, 2F), end = new Vector2(-0.9F, -1.5F);
+
+
+        Vector2 start = new Vector2(2.4f, 2F), end = new Vector2(-0.9F, -14.5F);
+        print("Start point " + start.ToString() + " to end point " + end.ToString());
+
+        if (LineClipping(ref start, ref end))
+        {
+
+            print("Accepted clipped line is Start point " + start.ToString() + " to end point " + end.ToString());
+
+        }
+        else print("Rejected");
+
     }
 
     // Update is called once per frame
@@ -197,60 +216,60 @@ public class Graphic_Pipeline : MonoBehaviour
 
 
 
-    private Vector2 Intersect(ref Vector2 start, ref Vector2 end)
-    {
-        //throw new NotImplementedException();
+    //private Vector2 Intersect(ref Vector2 start, ref Vector2 end)
+    //{
+    //    //throw new NotImplementedException();
 
-        OutCode O_Start = new OutCode(start);
-        OutCode O_End = new OutCode(end);
+    //    OutCode O_Start = new OutCode(start);
+    //    OutCode O_End = new OutCode(end);
 
-        if (start.x == end.x)
-        {
-            if (O_Start.ToString() == "1000")
-            {
-                return new Vector2(start.x, 1);
-            }
+    //    if (start.x == end.x)
+    //    {
+    //        if (O_Start.ToString() == "1000")
+    //        {
+    //            return new Vector2(start.x, 1);
+    //        }
 
-            else if (O_End.ToString() == "1000")
-            {
-                return new Vector2(start.x, 1);
-            }
+    //        else if (O_End.ToString() == "1000")
+    //        {
+    //            return new Vector2(start.x, 1);
+    //        }
 
-            if (O_Start.ToString() == "0100")
-            {
-                return new Vector2(start.x, -1);
-            }
+    //        if (O_Start.ToString() == "0100")
+    //        {
+    //            return new Vector2(start.x, -1);
+    //        }
 
-            else if (O_End.ToString() == "0100")
-            {
-                return new Vector2(start.x, -1);
-            }
-        }
+    //        else if (O_End.ToString() == "0100")
+    //        {
+    //            return new Vector2(start.x, -1);
+    //        }
+    //    }
 
-        if (start.y == end.y)
-        {
-            if (O_Start.ToString() == "0010")
-            {
-                return new Vector2(-1, start.y);
-            }
+    //    if (start.y == end.y)
+    //    {
+    //        if (O_Start.ToString() == "0010")
+    //        {
+    //            return new Vector2(-1, start.y);
+    //        }
 
-            else if (O_End.ToString() == "0010")
-            {
-                return new Vector2(-1, start.y);
-            }
+    //        else if (O_End.ToString() == "0010")
+    //        {
+    //            return new Vector2(-1, start.y);
+    //        }
 
-            if (O_Start.ToString() == "0001")
-            {
-                return new Vector2(1, start.y);
-            }
+    //        if (O_Start.ToString() == "0001")
+    //        {
+    //            return new Vector2(1, start.y);
+    //        }
 
-            else if (O_End.ToString() == "0001")
-            {
-                return new Vector2(1, start.y);
-            }
-        }
-        return new Vector2(float.NaN, float.NaN);
-    }
+    //        else if (O_End.ToString() == "0001")
+    //        {
+    //            return new Vector2(1, start.y);
+    //        }
+    //    }
+    //    return new Vector2(float.NaN, float.NaN);
+    //}
 
     private Vector2 Intersect(Vector2 start, Vector2 end, int v)
     {
@@ -325,43 +344,134 @@ public class Graphic_Pipeline : MonoBehaviour
             return LineClipping(ref end, ref start);
         }
 
-        Vector2 intersection = Intersect(ref start, ref end);
 
-        if (float.IsNaN(intersection.x) || float.IsNaN(intersection.y))
+
+        //Start must be outside the view port
+
+        if (start_o.up)
         {
-            if (start_o.up)
-            {
-                start = Intersect(start, end, 0);
-                return LineClipping(ref start, ref end);
+            if (end.y == start.y)
+                return false;
 
-            }
+            float n =(end.x - start.x) / (end.y - start.y);//This is 1/m where m is the slope
 
-            if (start_o.down)
-            {
-                start = Intersect(start, end, 1);
-                return LineClipping(ref start, ref end);
+            start = new Vector2(start.x + n*(1 - start.y), 1);
 
-            }
+            return LineClipping(ref start, ref end);
 
-            if (start_o.left)
-            {
-                start = Intersect(start, end, 2);
-                return LineClipping(ref start, ref end);
 
-            }
-
-            if (start_o.right)
-            {
-                start = Intersect(start, end, 3);
-                return LineClipping(ref start, ref end);
-
-            }
         }
 
+        if (start_o.down)
+        {
+            if (end.y == start.y)
+                return false;
 
+            float n = (end.x - start.x) / (end.y - start.y);//This is 1/m where m is the slope
+
+            start = new Vector2(start.x + n * (-1 - start.y), -1);
+
+            return LineClipping(ref start, ref end);
+
+
+        }
+
+        if (start_o.left)
+        {
+            if (end.x == start.x)
+                return false;
+
+            float m = (end.y - start.y) / (end.x - start.x);
+
+            start = new Vector2(-1,start.y + m * (-1 - start.x));
+
+            return LineClipping(ref start, ref end);
+
+
+        }
+
+        if (start_o.right)
+        {
+            if (end.x == start.x)
+                return false;
+
+            float m = (end.y - start.y) / (end.x - start.x);
+
+            start = new Vector2(1, start.y + m * (1 - start.x));
+
+            return LineClipping(ref start, ref end);
+
+
+        }
 
         return false;
+
+        //Vector2 intersection = Intersect(ref start, ref end);
+
+        //if (float.IsNaN(intersection.x) || float.IsNaN(intersection.y))
+        //{
+        //    if (start_o.up)
+        //    {
+        //        start = Intersect(start, end, 0);
+        //        return LineClipping(ref start, ref end);
+
+        //    }
+
+        //    if (start_o.down)
+        //    {
+        //        start = Intersect(start, end, 1);
+        //        return LineClipping(ref start, ref end);
+
+        //    }
+
+        //    if (start_o.left)
+        //    {
+        //        start = Intersect(start, end, 2);
+        //        return LineClipping(ref start, ref end);
+
+        //    }
+
+        //    if (start_o.right)
+        //    {
+        //        start = Intersect(start, end, 3);
+        //        return LineClipping(ref start, ref end);
+
+        //    }
+    }
+
+    List<Vector2Int> bresh(Vector2Int start, Vector2Int end)
+    {
+        int x = start.x;
+        int y = start.y;
+
+        List<Vector2Int> result = new List<Vector2Int>();
+        int dx = end.x - start.x; int dy = end.y - start.y;
+        int nve = 2*(dy -dx);
+        int pve = 2 * dy;
+        int p0 = 2 * dy - dx;
+
+        for (int i = 0; i <= dx; i++)
+        {
+            result.Add(new Vector2Int(x, y));
+
+            x++;
+
+            if (p0 < 0)
+            {
+                p0 += 2 * dy;
+            }
+            else
+            {
+                y++;
+                p0 += 2 * (dy - dx);
+            }
+        }
+             
+
+        return result;
+    }
+
+    
     }
 
 
-}
