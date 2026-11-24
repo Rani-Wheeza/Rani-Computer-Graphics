@@ -10,7 +10,7 @@ public class Graphic_Pipeline : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        /*Model myModel = new Model();
+        Model myModel = new Model();
         myModel.CreateUnityGameObject();
 
         List<Vector4> verts = Homog(myModel.vertices);
@@ -37,7 +37,7 @@ public class Graphic_Pipeline : MonoBehaviour
 
         Display(imageAfterRotation);
 
-        
+
         // 2nd Transformation Scale be (4,1,1)
 
         Matrix4x4 scaleMatrix = Matrix4x4.TRS(
@@ -52,14 +52,14 @@ public class Graphic_Pipeline : MonoBehaviour
 
         Display(imageAftertheScale);
 
-        
+
         Matrix4x4 traslationMatrix = Matrix4x4.TRS(
             new Vector3(0, -3, 2),
             Quaternion.identity,
             Vector3.one);
 
         Display(traslationMatrix);
-        
+
         List<Vector4> imageAfterTranslation = MatrixTransform(traslationMatrix, imageAftertheScale);
 
         Display(imageAfterTranslation);
@@ -73,38 +73,8 @@ public class Graphic_Pipeline : MonoBehaviour
 
         Display(singleAfterMOT);
 
-    }
 
-    private List<Vector4> Homog(List<Vector3> vertices)
-    {
-        List<Vector4> result = new List<Vector4>();
-
-        foreach (Vector3 v in vertices)
-        { result.Add(new Vector4(v.x, v.y, v.z, 1f)); }
-
-        return result;
-    }
-
-    private List<Vector4> MatrixTransform(Matrix4x4 matrix, List<Vector4> verts)
-    {
-        List<Vector4> hold = new List<Vector4>();
-        foreach (Vector4 v in verts)
-            hold.Add(matrix * v);
-
-        return hold;
-    }
-
-    private void Display(Matrix4x4 matrix)
-    {
-        for (int i = 0; i < 4; i++)
-            print(matrix.GetRow(i));
-    }
-
-    void Display(List<Vector4> verts)
-    {
-        foreach (Vector4 v in verts) { print(v); }
-    }*/
-
+        //Test OutCode class
         OutCode o1 = new OutCode(new Vector2(2f, 2f));//1001
         print(o1.ToString());
 
@@ -160,42 +130,17 @@ public class Graphic_Pipeline : MonoBehaviour
         bool o12 = o3 != o3;//0101 == 0101 = false got = false
         print(o12.ToString());
 
-        /*//Test Outodes
-        OutCode o1 = new OutCode(new Vector2(0, 2));
-        OutCode o2 = new OutCode(new Vector2(0, -2));
-        OutCode o3 = new OutCode(new Vector2(2, 2));
-        OutCode o4 = new OutCode(new Vector2(-2, -2));
-        OutCode o5 = new OutCode(new Vector2(2, -2));
-        OutCode o6 = new OutCode(new Vector2(-2, 2));
-
-        print(o1.ToString());
-        print(o2.ToString());
-        print(o3.ToString());
-        print(o4.ToString());*/
-        /*string test5 = o5.ToString();
-        string test6 = o6.ToString();*/
-
-
-
-        /*Vector2 p1 = new Vector2(0f, -2f);
-        Vector2 p2 = new Vector2(0f, 2f);
-        Vector2 p3 = new Vector2(2f, -2f);
-        Vector2 p4 = new Vector2(-2f, 2f);
-        Vector2 p5 = new Vector2(-2f, -2f);
-        Vector2 p6 = new Vector2(2f, 2f);*/
 
         //print(LineClipping(ref Vector2 start, ref Vector2 end));
 
-
-
-
         //Vector2 start = new Vector2(0F, 0F), end = new Vector2(1F, 1F);  // Tested correct
-        // Vector2 start = new Vector2(-2.4f, 0F), end = new Vector2(-1.7F, 1F);  // Tested correct
+        //Vector2 start = new Vector2(-2.4f, 0F), end = new Vector2(-1.7F, 1F);  // Tested correct
 
-        //   Vector2 start = new Vector2(2.4f, 2F), end = new Vector2(-0.9F, -1.5F);
+        //Vector2 start = new Vector2(2.4f, 2F), end = new Vector2(-0.9F, -1.5F);// Tested correct
 
 
-        Vector2 start = new Vector2(2.4f, 2F), end = new Vector2(-0.9F, -14.5F);
+        Vector2 start = new Vector2(2.4f, 2F), end = new Vector2(-0.9F, -14.5F);// Tested correct
+
         print("Start point " + start.ToString() + " to end point " + end.ToString());
 
         if (LineClipping(ref start, ref end))
@@ -208,119 +153,36 @@ public class Graphic_Pipeline : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
+    private List<Vector4> Homog(List<Vector3> vertices)
     {
+        List<Vector4> result = new List<Vector4>();
 
+        foreach (Vector3 v in vertices)
+        { result.Add(new Vector4(v.x, v.y, v.z, 1f)); }
+
+        return result;
     }
 
-
-
-    //private Vector2 Intersect(ref Vector2 start, ref Vector2 end)
-    //{
-    //    //throw new NotImplementedException();
-
-    //    OutCode O_Start = new OutCode(start);
-    //    OutCode O_End = new OutCode(end);
-
-    //    if (start.x == end.x)
-    //    {
-    //        if (O_Start.ToString() == "1000")
-    //        {
-    //            return new Vector2(start.x, 1);
-    //        }
-
-    //        else if (O_End.ToString() == "1000")
-    //        {
-    //            return new Vector2(start.x, 1);
-    //        }
-
-    //        if (O_Start.ToString() == "0100")
-    //        {
-    //            return new Vector2(start.x, -1);
-    //        }
-
-    //        else if (O_End.ToString() == "0100")
-    //        {
-    //            return new Vector2(start.x, -1);
-    //        }
-    //    }
-
-    //    if (start.y == end.y)
-    //    {
-    //        if (O_Start.ToString() == "0010")
-    //        {
-    //            return new Vector2(-1, start.y);
-    //        }
-
-    //        else if (O_End.ToString() == "0010")
-    //        {
-    //            return new Vector2(-1, start.y);
-    //        }
-
-    //        if (O_Start.ToString() == "0001")
-    //        {
-    //            return new Vector2(1, start.y);
-    //        }
-
-    //        else if (O_End.ToString() == "0001")
-    //        {
-    //            return new Vector2(1, start.y);
-    //        }
-    //    }
-    //    return new Vector2(float.NaN, float.NaN);
-    //}
-
-    private Vector2 Intersect(Vector2 start, Vector2 end, int v)
+    private List<Vector4> MatrixTransform(Matrix4x4 matrix, List<Vector4> verts)
     {
-        throw new NotImplementedException();
+        List<Vector4> hold = new List<Vector4>();
+        foreach (Vector4 v in verts)
+            hold.Add(matrix * v);
 
-        /*// int edge 0 = up, 1 = down, 2 = left, 3 = right
-
-        // Check for vertical line
-        if (end.x == start.x)
-        {
-            return edge switch
-            {
-                0 => new Vector2(start.x, 1), // Up edge
-                1 => new Vector2(start.x, -1), // Down edge
-                2 => new Vector2(-1, start.y), // Left edge
-                3 => new Vector2(1, start.y),  // Right edge
-                _ => new Vector2(float.NaN, float.NaN) // No intersection with up or down edges
-            };
-        }
-
-        // Check for horizontal line
-        if (end.y == start.y)
-        {
-            return edge switch
-            {
-                0 => new Vector2(float.NaN, float.NaN), // Up edge (no valid x)
-                1 => new Vector2(float.NaN, float.NaN), // Down edge (no valid x)
-                _ => new Vector2(float.NaN, float.NaN) // No intersection with left or right edges
-            };
-        }
-
-        // Regular case: calculate slope and intercept
-        float m = (end.y - start.y) / (end.x - start.x);
-
-        // y = mx+c  or  x = y-c/m
-        float c = start.y - m * start.x;
-
-        switch (edge)
-        {
-            case 0: // up
-                return new Vector2((1 - c) / m, 1); // y = 1
-            case 1: // down
-                return new Vector2((-1 - c) / m, -1); // y = -1
-            case 2: // left
-                return new Vector2(-1, c - m); // left x = -1
-            case 3: // right
-                return new Vector2(1, m + c); // right x = 1
-            default:
-                return new Vector2(float.NaN, float.NaN); // Invalid edge
-        }*/
+        return hold;
     }
+
+    private void Display(Matrix4x4 matrix)
+    {
+        for (int i = 0; i < 4; i++)
+            print(matrix.GetRow(i));
+    }
+
+    void Display(List<Vector4> verts)
+    {
+        foreach (Vector4 v in verts) { print(v); }
+    }
+
 
     public bool LineClipping(ref Vector2 start, ref Vector2 end)
     {
@@ -353,9 +215,9 @@ public class Graphic_Pipeline : MonoBehaviour
             if (end.y == start.y)
                 return false;
 
-            float n =(end.x - start.x) / (end.y - start.y);//This is 1/m where m is the slope
+            float n = (end.x - start.x) / (end.y - start.y);//This is 1/m where m is the slope
 
-            start = new Vector2(start.x + n*(1 - start.y), 1);
+            start = new Vector2(start.x + n * (1 - start.y), 1);
 
             return LineClipping(ref start, ref end);
 
@@ -383,7 +245,7 @@ public class Graphic_Pipeline : MonoBehaviour
 
             float m = (end.y - start.y) / (end.x - start.x);
 
-            start = new Vector2(-1,start.y + m * (-1 - start.x));
+            start = new Vector2(-1, start.y + m * (-1 - start.x));
 
             return LineClipping(ref start, ref end);
 
@@ -406,47 +268,57 @@ public class Graphic_Pipeline : MonoBehaviour
 
         return false;
 
-        //Vector2 intersection = Intersect(ref start, ref end);
-
-        //if (float.IsNaN(intersection.x) || float.IsNaN(intersection.y))
-        //{
-        //    if (start_o.up)
-        //    {
-        //        start = Intersect(start, end, 0);
-        //        return LineClipping(ref start, ref end);
-
-        //    }
-
-        //    if (start_o.down)
-        //    {
-        //        start = Intersect(start, end, 1);
-        //        return LineClipping(ref start, ref end);
-
-        //    }
-
-        //    if (start_o.left)
-        //    {
-        //        start = Intersect(start, end, 2);
-        //        return LineClipping(ref start, ref end);
-
-        //    }
-
-        //    if (start_o.right)
-        //    {
-        //        start = Intersect(start, end, 3);
-        //        return LineClipping(ref start, ref end);
-
-        //    }
     }
 
-    List<Vector2Int> bresh(Vector2Int start, Vector2Int end)
+    //This is what am working on for rasterization of lines using Bresenham's algorithm
+    /*List<Vector2Int> bresh(Vector2Int start, Vector2Int end)
+    {
+        
+        List<Vector2Int> result = new List<Vector2Int>();
+        int dx = end.x - start.x; int dy = end.y - start.y;
+
+        if(dx < 0)
+        {
+            return bresh(end, start);
+        }
+
+        if(dy < 0)
+        {
+            return nvey(bresh(nvey(start), nvey(end)));
+        }
+
+        if(dy > dx)
+        {
+            return SwapXY(bresh(SwapXY(start), SwapXY(end)));
+        }
+
+
+
+
+
+        return result;
+    }
+
+    private List<Vector2Int> SwapXY(List<Vector2Int> vector2Ints)
+    {
+        throw new NotImplementedException();
+    }
+
+    private Vector2Int nvey(Vector2Int start)
+    {
+        throw new NotImplementedException();
+    }*/
+
+
+    //This is a duplicate with previous work
+    /*List<Vector2Int> bresh(Vector2Int start, Vector2Int end)
     {
         int x = start.x;
         int y = start.y;
 
         List<Vector2Int> result = new List<Vector2Int>();
         int dx = end.x - start.x; int dy = end.y - start.y;
-        int nve = 2*(dy -dx);
+        int nve = 2 * (dy - dx);
         int pve = 2 * dy;
         int p0 = 2 * dy - dx;
 
@@ -466,12 +338,18 @@ public class Graphic_Pipeline : MonoBehaviour
                 p0 += 2 * (dy - dx);
             }
         }
-             
+
 
         return result;
+    }*/
+
+    // Update is called once per frame
+    void Update()
+    {
+
     }
 
-    
-    }
+
+}
 
 
